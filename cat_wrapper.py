@@ -33,8 +33,8 @@ os.system(command3)
 os.system(command4)
 
 #now get HGT
-H_folder=RH_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/H' 
-os.chdir(RH_folder)
+H_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/H' 
+os.chdir(H_folder)
 
 command='mv HGT* ' + str(cat_directory)
 os.system(command)
@@ -52,11 +52,39 @@ command='mv SOILHGT* ' + str(cat_directory)
 #now its time for the reamining met1 fields
 met1_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/MET1'
 os.chdir(met1_folder)
-command1='mv UU* ' +str(RH_folder)
-command2='mv VV* ' +str(RH_folder)
-command3='mv PMSL* ' +str(RH_folder)
+command1='mv UU* ' +str(cat_directory)
+command2='mv VV* ' +str(cat_directory)
+command3='mv PMSL* ' +str(cat_directory)
 os.system(command1)
 os.system(command2)
 os.system(command3)
 
 #now the met 2 fields
+met2_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/MET2'
+os.chdir(met2_folder)
+command1='mv ST* ' +str(cat_directory)
+command2='mv SM* ' +str(cat_directory)
+command3='mv SKINTEMP* ' +str(cat_directory)
+os.system(command1)
+os.system(command2)
+os.system(command3)
+
+#now get model level winds:
+U_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/U' 
+os.chdir(U_folder)
+
+command='mv UU* ' + str(cat_directory)
+os.system(command)
+
+V_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/V' 
+os.chdir(U_folder)
+
+command='mv VV* ' + str(cat_directory)
+os.system(command)
+
+
+#now run the catGEOS Script 
+os.chdir('/scratch/cm5515/scripts')
+command='sbatch catGEOS.sbatch'
+os.system(command)
+
