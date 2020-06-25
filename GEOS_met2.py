@@ -52,7 +52,7 @@ while now <= end:
    namelist.write("/\n")
    namelist.write("\n")
    namelist.write("&variables\n")
-      namelist.write("numberofVariables=9\n")
+   namelist.write("numberofVariables=9\n")
    namelist.write("\n")
    namelist.write("variableRanks(1) = 3,\n")
    namelist.write("variableLevelTypes(1) = 1,\n")

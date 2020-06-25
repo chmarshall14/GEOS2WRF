@@ -6,16 +6,15 @@ Created on Thu May  7 23:57:30 2020
 """
 # Import necessary libraries
 from datetime import datetime, timedelta
+from util_wrapper import start, end 
 import os
 # Change working directory
 os.chdir('/scratch/cm5515')
 #Use same start and end date as fetcher.py
-start = datetime(2005, 8, 13, 19, 00)
-end = datetime(2005, 8, 17, 22, 30) 
 
 #%% 
-# Create a new outfolder for each storm (just do this in the folder with all the data? Call that storm_n?)
-out_folder = 'storm_'+ start.strftime('%Y%m%d') +'/const'
+#go to folder
+out_folder = 'storm_'+ start.strftime('%Y%m%d') +'/const/soil'
 # Go inside the out folder
 os.chdir(out_folder)
 #go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps

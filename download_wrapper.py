@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 import os
 # Change working directory
 os.chdir('/scratch/cm5515')
-#Input start and end time for your storm 
+#Input start and end time for your storm
 start = datetime(2005, 8, 13, 19, 00)
 end = datetime(2005, 8, 17, 22, 30)
 
@@ -20,6 +20,9 @@ end = datetime(2005, 8, 17, 22, 30)
 out_folder = 'storm_'+ start.strftime('%Y%m%d') 
 os.mkdir(out_folder)
 os.chdir(out_folder)
+date=start.strftime('%Y%m%d') 
+comeback='/scratch/cm5515/' + out_folder 
+print(comeback)
 
 ################################################################################################################
 
@@ -68,7 +71,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/const\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/const\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_const\n")
 sbatch.close()
 sbatch=open("CONST.sbatch", "r")
@@ -78,7 +81,8 @@ print(test)
 command='sbatch CONST.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 ###########################################
 #2) Geopotential Height 
 ##########################################
@@ -119,7 +123,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/H\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/H\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_H\n")
 sbatch.close()
 sbatch=open("H.sbatch", "r")
@@ -129,7 +133,8 @@ print(test)
 command='sbatch H.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 
 ############################################
 #3) MET1
@@ -170,7 +175,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/MET1\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/MET1\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_MET1\n")
 sbatch.close()
 sbatch=open("MET1.sbatch", "r")
@@ -180,7 +185,8 @@ print(test)
 command='sbatch MET1.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 
 ############################################
 #4) MET2
@@ -221,7 +227,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/MET2\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/MET2\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_MET2\n")
 sbatch.close()
 sbatch=open("MET2.sbatch", "r")
@@ -231,7 +237,8 @@ print(test)
 command='sbatch MET2.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 
 ############################################
 #5) PL
@@ -272,7 +279,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/PL\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/PL\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_PL\n")
 sbatch.close()
 sbatch=open("PL.sbatch", "r")
@@ -282,7 +289,8 @@ print(test)
 command='sbatch PL.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 
 ############################################
 #6) T
@@ -323,7 +331,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/T\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/T\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_T\n")
 sbatch.close()
 sbatch=open("T.sbatch", "r")
@@ -333,7 +341,8 @@ print(test)
 command='sbatch T.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 
 ############################################
 #7) U
@@ -374,7 +383,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/U\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/U\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_U\n")
 sbatch.close()
 sbatch=open("U.sbatch", "r")
@@ -384,7 +393,8 @@ print(test)
 command='sbatch U.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 
 ############################################
 #8) QV
@@ -425,7 +435,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/QV\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/QV\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_QV\n")
 sbatch.close()
 sbatch=open("QV.sbatch", "r")
@@ -435,7 +445,8 @@ print(test)
 command='sbatch QV.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 
 
 
@@ -488,7 +499,8 @@ print(test)
 command='sbatch V.sbatch'
 os.system(command)
 #now leave this cursed subfolder 
-os.system('cd ../')
+os.chdir(comeback)
+
 
 
 

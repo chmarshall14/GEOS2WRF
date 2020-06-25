@@ -18,10 +18,12 @@ import os
 os.chdir('/scratch/cm5515/scripts')
 
 #input the start and endtime of your storm--the low-level geos2wps scripts will read this in
+#I am doing this instead of reading it in from the download script so you can start downloading the next storm as soon as the first one finishes
+
 start = datetime(2005, 8, 13, 19, 00)
 end = datetime(2005, 8, 17, 22, 30)  
 
-#sbatch and low-level scripts to process are already written. Now submit those jobs. 
+#sbatch scripts that run the lower-level python scripts are already written, now submit them
 
 command1='sbatch GEOS_CONST.sbatch'
 command2='sbatch GEOS_H.sbatch'
@@ -32,5 +34,16 @@ command6='sbatch GEOS_QV.sbatch'
 command7='sbatch GEOS_T.sbatch'
 command8='sbatch GEOS_U.sbatch'
 command9='sbatch GEOS_V.sbatch'
+
+os.system(command1)
+os.system(command2)
+os.system(command3)
+os.system(command4)
+os.system(command5)
+os.system(command6)
+os.system(command7)
+os.system(command8)
+os.system(command9)
+
 
 
