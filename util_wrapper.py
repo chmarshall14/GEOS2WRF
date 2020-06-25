@@ -16,7 +16,7 @@ import os
 
 #input the start and endtime of your storm--the low-level geos2wps scripts will read this in
 #I am doing this instead of reading it in from the GEOS script so you can start processing the next storm as soon as the first one finishes
-
+#but, the cat script reads in this date time, so be careful about how you move forward
 start = datetime(2005, 8, 13, 19, 00)
 end = datetime(2005, 8, 17, 22, 30)  
 date=start.strftime('%Y%m%d') 

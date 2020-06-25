@@ -8,12 +8,12 @@ Created on Fri May  8 00:03:41 2020
 
 # Import necessary libraries
 from datetime import datetime, timedelta
+from util_wrapper import start, end 
 import os
 # Change working directory
-os.chdir('/scratch/cm5515/storm_20050813/CAT')
-#Use same start and end date as fetcher.py
-start = datetime(2005, 8, 13, 19, 00)
-end = datetime(2005, 8, 17, 22, 30) 
+cat_directory='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/CAT' 
+os.chdir(cat_directory)
+
 
 #now concatenate the files together into GEOS:TIMESTAMP
 now = start
@@ -42,8 +42,8 @@ while now <= end:
     os.system(command2)
     os.system(command3)
    # os.system(command4)
-    print(command1)
-    print(command2)
-    print(command3)
+    # print(command1)
+    # print(command2)
+    # print(command3)
     
     now += timedelta(0, 30*60)

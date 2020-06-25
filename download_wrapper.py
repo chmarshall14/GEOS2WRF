@@ -13,8 +13,7 @@ import os
 # Change working directory
 os.chdir('/scratch/cm5515')
 #Input start and end time for your storm
-start = datetime(2005, 8, 13, 19, 00)
-end = datetime(2005, 8, 17, 22, 30)
+from util_wrapper import start, end 
 
 #create a folder for your storm
 out_folder = 'storm_'+ start.strftime('%Y%m%d') 

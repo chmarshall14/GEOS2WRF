@@ -56,7 +56,7 @@ while now <= end:
    namelist.write("variableRanks(1) = 3,\n") 
    namelist.write("variableLevelTypes(1) = 4,\n") 
    namelist.write("variableNamesIn(1)='PSL',\n") 
-   namelist.write("variableNamesOut(1)='PSML',\n") 
+   namelist.write("variableNamesOut(1)='PMSL',\n") 
    namelist.write("variableUnits(1)='Pa',\n") 
    namelist.write("variableDescriptions(1)='mean_sea_level_pressure',\n") 
    namelist.write("\n")
