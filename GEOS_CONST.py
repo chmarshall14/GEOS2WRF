@@ -16,15 +16,15 @@ Created on Tue May  5 10:54:09 2020
 
 # Import necessary libraries
 from datetime import datetime, timedelta
+from GEOS_wrapper import start, end 
 import os
 # Change working directory
 os.chdir('/scratch/cm5515')
 #Use same start and end date as fetcher.py
-start = datetime(2005, 8, 13, 19, 00)
-end = datetime(2005, 8, 17, 22, 30) 
+
 
 #%% 
-# Create a new outfolder for each storm (just do this in the folder with all the data? Call that storm_n?)
+# go inside the right subfolder
 out_folder = 'storm_'+ start.strftime('%Y%m%d') + '/const'
 # Go inside the out folder
 os.chdir(out_folder)
