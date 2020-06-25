@@ -13,8 +13,9 @@ import os
 # Change working directory
 os.chdir('/scratch/cm5515')
 #Input start and end time for your storm
-from util_wrapper import start, end 
-
+start = datetime(2005, 8, 13, 19, 00)
+end = datetime(2005, 8, 17, 22, 30)  
+date=start.strftime('%Y%m%d') 
 #create a folder for your storm
 out_folder = 'storm_'+ start.strftime('%Y%m%d') 
 os.mkdir(out_folder)
@@ -488,7 +489,7 @@ sbatch.write("#SBATCH --ntasks-per-node=10\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
-sbatch.write("cd /scratch/cm5515/storm_20050813/V\n")
+sbatch.write("cd /scratch/cm5515/storm_"+str(date)+ "/V\n")
 sbatch.write("wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -i wget_V\n")
 sbatch.close()
 sbatch=open("V.sbatch", "r")
