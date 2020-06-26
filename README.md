@@ -2,7 +2,7 @@
 
 You will have to change the directory paths in these scripts to use them. It also assumes you have GEOS2WRF and WRF-4.0 compiled on your system. 
 
-Below is a log of how each of the scripts work. To run this (after you have changed the directory paths in the scripts), the only thing you should regularly have to edit is the namelist.geos_scripts, which allows you to change the start and end times of your storms. From there, 
+Below is a log of how each of the scripts work. To run this (after you have changed the directory paths in the scripts), the only thing you should regularly have to edit is the namelist_geos_scripts, which allows you to change the start and end times of your storms. From there, the download_wrapper downloads and organizes the NASA data, the geos_wrapper processes it, the util_wrapper creates three more necessary fields and the cat_wrapper packages all the disparate files into one GEOS:TIMESTAMP file to use with WPS. 
 
 These are python scripts that take a start date and end date and time as inputs, then download the necessary data files from NASA and process them using GEOS2WPS and the utilities createLANDSEA, createRH, and createSOILHGT. 
 
