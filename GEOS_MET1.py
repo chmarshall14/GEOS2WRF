@@ -17,7 +17,7 @@ from GEOS_wrapper import start, end
 
 #%% 
 # go inside the right subfolder
-out_folder = 'storm_'+ start.strftime('%Y%m%d') +'/MET1'
+out_folder = '/scratch/cm5515/storm_'+ start.strftime('%Y%m%d') +'/MET1'
 # Go inside the out folder
 os.chdir(out_folder)
 #go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps
@@ -110,7 +110,7 @@ while now <= end:
    print(test)
    namelist.close()
    #now run geos2wps
-   command = 'srun ./geos2wps'
+   command = './geos2wps'
    os.system(command)
 
    #move on to the next timestep

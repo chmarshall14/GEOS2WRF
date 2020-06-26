@@ -9,8 +9,13 @@ Created on Thu Jun 25 14:07:32 2020
 #a file that prepares the GEOS files to be concatenated and runs catGEOS
 # Import necessary libraries
 from datetime import datetime, timedelta
-from util_wrapper import start, end 
 import os
+#import the start and end time from the namelist
+#take the start and end date from the namelist
+from namelist.geos_scripts import cat_start, cat_end
+start = cat_start
+end= cat_end
+
 # create a working directory
 cat_directory='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/CAT' 
 os.mkdir(cat_directory)

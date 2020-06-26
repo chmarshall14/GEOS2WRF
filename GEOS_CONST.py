@@ -16,16 +16,18 @@ Created on Tue May  5 10:54:09 2020
 
 # Import necessary libraries
 from datetime import datetime, timedelta
-from GEOS_wrapper import start, end 
 import os
 # Change working directory
 os.chdir('/scratch/cm5515')
-#Use same start and end date as fetcher.py
+#take the start and end date from the namelist
+from namelist.geos_scripts import GEOS_start, GEOS_end
+start = GEOS_start
+end= GEOS_end
 
 
 #%% 
-# go inside the right subfolder
-out_folder = 'storm_'+ start.strftime('%Y%m%d') + '/const'
+# The outfolder for this field was created by the download_wrapper
+out_folder = '/scratch/cm5515/storm_'+ start.strftime('%Y%m%d') + '/const'
 # Go inside the out folder
 os.chdir(out_folder)
 #go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps 

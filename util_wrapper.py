@@ -13,13 +13,11 @@ Created on Thu Jun 25 13:16:13 2020
 from datetime import datetime, timedelta
 import os
 
+#take the start and end date from the namelist
+from namelist.geos_scripts import util_start, util_end
+start = util_start
+end= util_end
 
-#input the start and endtime of your storm--the low-level geos2wps scripts will read this in
-#I am doing this instead of reading it in from the GEOS script so you can start processing the next storm as soon as the first one finishes
-#but, the cat script reads in this date time, so be careful about how you move forward
-start = datetime(2005, 8, 13, 19, 00)
-end = datetime(2005, 8, 17, 22, 30)  
-date=start.strftime('%Y%m%d') 
 
 #first, we want to process a single time-slice of SST to use as a constant
 #geos2wps should already be here, if not remove the pound sign
@@ -83,7 +81,7 @@ sbatch.write("#SBATCH --output=GEOS_SST.out \n")
 sbatch.write("#SBATCH --error=GEOS_SST.err\n")
 sbatch.write("#SBATCH --time=1:00:00\n")
 sbatch.write("#SBATCH --mem=80GB\n")
-sbatch.write("#SBATCH --ntasks-per-node=10\n")
+sbatch.write("#SBATCH --ntasks-per-node=25\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")

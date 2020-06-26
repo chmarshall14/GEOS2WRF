@@ -6,22 +6,18 @@ Created on Thu Jun 11 15:27:43 2020
 """
 
 
-#a script for processing GEOS data using GEOS2WRF. It is designed to use the same file structure as the download_wrapper
+#a script for processing GEOS data using GEOS2WRF. It is designed to use the same folder structure as the download_wrapper
 #This script runs GEOSWPS but does not run any of the utilities because of timing issues. That will be yet another high level script. 
 #This is a fairly uninteresting script
 
 
 # Import necessary libraries
-from datetime import datetime, timedelta
 import os
 # Change working directory
 os.chdir('/scratch/cm5515/scripts')
 
-#input the start and endtime of your storm--the low-level geos2wps scripts will read this in
-#I am doing this instead of reading it in from the download script so you can start downloading the next storm as soon as the first one finishes
 
-start = datetime(2005, 8, 13, 19, 00)
-end = datetime(2005, 8, 17, 22, 30)  
+
 
 #sbatch scripts that run the lower-level python scripts are already written, now submit them
 
@@ -35,6 +31,7 @@ command7='sbatch GEOS_T.sbatch'
 command8='sbatch GEOS_U.sbatch'
 command9='sbatch GEOS_V.sbatch'
 
+
 os.system(command1)
 os.system(command2)
 os.system(command3)
@@ -44,6 +41,5 @@ os.system(command6)
 os.system(command7)
 os.system(command8)
 os.system(command9)
-
 
 
