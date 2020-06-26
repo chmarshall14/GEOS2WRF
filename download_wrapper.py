@@ -14,7 +14,7 @@ import os
 os.chdir('/scratch/cm5515')
 
 #take the start and end time from the namelist
-from namelist.geos_scripts import download_start, download_end
+from namelist_geos_scripts import download_start, download_end
 start = download_start
 end= download_end
 

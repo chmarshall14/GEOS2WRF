@@ -11,12 +11,11 @@ from datetime import datetime, timedelta
 import os
 # Change working directory
 os.chdir('/scratch/cm5515')
-#Use same start and end date as fetcher.py
-from GEOS_wrapper import start, end 
- 
+#take the start and end date from the namelist
+from namelist_geos_scripts import GEOS_start, GEOS_end
+start = GEOS_start
+end= GEOS_end
 
-#%% 
-# go inside the right subfolder
 out_folder = '/scratch/cm5515/storm_'+ start.strftime('%Y%m%d') +'/MET1'
 # Go inside the out folder
 os.chdir(out_folder)

@@ -14,7 +14,7 @@ from datetime import datetime, timedelta
 import os
 
 #take the start and end date from the namelist
-from namelist.geos_scripts import util_start, util_end
+from namelist_geos_scripts import util_start, util_end
 start = util_start
 end= util_end
 

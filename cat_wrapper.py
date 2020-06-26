@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 import os
 #import the start and end time from the namelist
 #take the start and end date from the namelist
-from namelist.geos_scripts import cat_start, cat_end
+from namelist_geos_scripts import cat_start, cat_end
 start = cat_start
 end= cat_end
 

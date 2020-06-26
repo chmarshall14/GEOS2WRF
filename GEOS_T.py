@@ -12,7 +12,7 @@ import os
 # Change working directory
 os.chdir('/scratch/cm5515')
 #take the start and end date from the namelist
-from namelist.geos_scripts import GEOS_start, GEOS_end
+from namelist_geos_scripts import GEOS_start, GEOS_end
 start = GEOS_start
 end= GEOS_end
 
