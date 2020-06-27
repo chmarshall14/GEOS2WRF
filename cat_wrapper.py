@@ -82,7 +82,7 @@ command='mv UU* ' + str(cat_directory)
 os.system(command)
 
 V_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/V' 
-os.chdir(U_folder)
+os.chdir(V_folder)
 
 command='mv VV* ' + str(cat_directory)
 os.system(command)

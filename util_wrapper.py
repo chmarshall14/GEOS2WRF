@@ -85,6 +85,21 @@ sbatch.write("#SBATCH --ntasks-per-node=25\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")
 sbatch.write("#SBATCH --mail-type=END\n")
 sbatch.write("#SBATCH --mail-user=cm5515@nyu.edu\n")
+sbatch.write("module load intel/17.0.1\n")
+sbatch.write("module load openmpi/intel/3.1.3\n")
+sbatch.write("module load netcdf/intel/4.4.1.1\n")
+sbatch.write("module load libpng/intel/1.6.29\n")
+sbatch.write("module load jasper/intel/2.0.14\n")
+sbatch.write("module load openjpeg/intel/2.1.2\n")
+sbatch.write("module load zlib/intel/1.2.8\n")
+sbatch.write("module load hdf5/intel/1.8.21\n")
+sbatch.write("module load szip/intel/2.1.1\n")
+sbatch.write("module load hdf/intel/4.2.12\n")
+sbatch.write("module load hdf/intel/4.2.6 \n")
+sbatch.write("module load netcdf/intel/4.1.1\n")
+sbatch.write("module load zlib/intel/1.2.8 \n")
+sbatch.write("module load jpeg/intel/9b\n")
+sbatch.write("module load python3/intel/3.7.3\n")
 sbatch.write("cd " + str(sst_directory) +"\n")
 sbatch.write("srun ./geos2wps")
 sbatch.close()
@@ -115,8 +130,8 @@ os.system(command)
 
 ############################################################################################
 #now run createLANDSEA
-comamnd='sbatch createLANDSEA.sbatch'
-
+command='sbatch createLANDSEA.sbatch'
+os.system(command)
 ############################################################################################
 #now run createRH
 
@@ -125,7 +140,7 @@ comamnd='sbatch createLANDSEA.sbatch'
 RH_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/RH' 
 os.mkdir(RH_folder)
 
-#now move everything that createRH needs into the RH folder
+# now move everything that createRH needs into the RH folder
 t_folder='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/T'
 os.chdir(t_folder)
 command='mv TT* ' +str(RH_folder)
