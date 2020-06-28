@@ -9,16 +9,16 @@ Created on Fri May  8 00:03:41 2020
 # Import necessary libraries
 from datetime import datetime, timedelta
 #take the start and end date from the namelist
-from namelist_geos_scripts import util_start, util_end
-start = util_start
-end= util_end
+from namelist_geos_scripts import cat_start, cat_end, path_to_storm, script_folder, net_id
+start = cat_start
+end= cat_end
 
 
 #%% 
 # The outfolder for this field was created by the download_wrapper
 import os
 # Change working directory
-cat_directory='/scratch/cm5515/storm_' + start.strftime('%Y%m%d') +'/CAT' 
+cat_directory=path_to_storm+ '/storm_' + start.strftime('%Y%m%d') +'/CAT' 
 os.chdir(cat_directory)
 
 

@@ -10,22 +10,20 @@ import os
 # Change working directory
 os.chdir('/scratch/cm5515')
 #take the start and end date from the namelist
-from namelist_geos_scripts import util_start, util_end
+from namelist_geos_scripts import util_start, util_end, path_to_storm, path_to_createLANDSEA
 start = util_start
 end= util_end
 
-
-#%% 
-#go to folder
-out_folder = 'storm_'+ start.strftime('%Y%m%d') +'/const'
+out_folder = path_to_storm+ '/storm_'+ start.strftime('%Y%m%d') + '/const'
 # Go inside the out folder
 os.chdir(out_folder)
-#go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps
+#go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps 
+ls_command='ln -s ' + path_to_createLANDSEA
 
-command='ln -s /scratch/cm5515/NASA/shenglong/geos2wrf_merra2wrf/createLANDSEA'
-os.system(command)
+#first, process the daily constants--land, ocean and lake fractions  
 
-#%%
+os.system(ls_command)
+
 #Now run utilities 
 #utilities want data combined into files with the format GEOS:TIMESTAMP
 #first run createLANDSEA, which tells wrf where the land is 
@@ -69,8 +67,7 @@ while now <= end:
     print(test)
     namelist.close()
     #create a symbolic link to the executable
-    link="ln -s /scratch/cm5515/NASA/shenglong/geos2wrfmerra2wrf/createLANDSEA"
-    os.system(link)
+
     #now run createLANDSEA
     command="srun ./createLANDSEA"
     os.system(command)

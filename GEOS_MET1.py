@@ -10,19 +10,25 @@ Created on Thu May  7 18:28:20 2020
 from datetime import datetime, timedelta
 import os
 # Change working directory
-os.chdir('/scratch/cm5515')
+
 #take the start and end date from the namelist
-from namelist_geos_scripts import GEOS_start, GEOS_end
+from namelist_geos_scripts import GEOS_start, GEOS_end, path_to_storm, path_to_geos2wps, iLonMin, iLonMax, jLatMin, jLatMax
+os.chdir(path_to_storm)
 start = GEOS_start
 end= GEOS_end
 
-out_folder = '/scratch/cm5515/storm_'+ start.strftime('%Y%m%d') +'/MET1'
+
+#%% 
+# The outfolder for this field was created by the download_wrapper
+out_folder = path_to_storm+ '/storm_'+ start.strftime('%Y%m%d') + '/MET1'
 # Go inside the out folder
 os.chdir(out_folder)
-#go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps
-command='ln -s /scratch/cm5515/NASA/shenglong/geos2wrf_merra2wrf/geos2wps'
-os.system(command)
+#go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps 
+ls_command='ln -s ' + path_to_geos2wps
 
+#first, process the daily constants--land, ocean and lake fractions  
+
+os.system(ls_command)
 now = start
 #create a namelist
 while now <= end:
@@ -95,10 +101,10 @@ while now <= end:
    namelist.write("variableDescriptions(6)='surface_pressure',\n") 
    namelist.write("/\n")
    namelist.write("&subsetData\n")
-   namelist.write("iLonMin=1121,\n") 
-   namelist.write("iLonMax=2721,\n") 
-   namelist.write("jLatMin=1601,\n") 
-   namelist.write("jLatMax=2241,\n")
+   namelist.write("iLonMin=" + str(iLonMin) + ",\n") 
+   namelist.write("iLonMax=" + str(iLonMax) + ",\n") 
+   namelist.write("jLatMin=" + str(jLatMin) + ",\n") 
+   namelist.write("jLatMax=" + str(jLatMax) + ",\n")
    namelist.write("kVertMin=1,\n") 
    namelist.write("kVertMax=72,\n")
    namelist.write("/")

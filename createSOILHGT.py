@@ -6,25 +6,23 @@ Created on Thu May  7 23:57:30 2020
 """
 # Import necessary libraries
 from datetime import datetime, timedelta
-#take the start and end date from the namelist
-from namelist_geos_scripts import util_start, util_end
-start = util_start
-end= util_end
-
 import os
 # Change working directory
 os.chdir('/scratch/cm5515')
-#Use same start and end date as fetcher.py
+#take the start and end date from the namelist
+from namelist_geos_scripts import util_start, util_end, path_to_storm, path_to_createSOILHGT
+start = util_start
+end= util_end
 
-#%% 
-#go to folder
-out_folder = 'storm_'+ start.strftime('%Y%m%d') +'/const/soil'
+out_folder = path_to_storm+ '/storm_'+ start.strftime('%Y%m%d') + '/const/soil'
 # Go inside the out folder
 os.chdir(out_folder)
-#go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps
+#go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps 
+ls_command='ln -s ' + path_to_createSOILHGT
+print(ls_command)
+#first, process the daily constants--land, ocean and lake fractions  
 
-command='ln -s /scratch/cm5515/NASA/shenglong/geos2wrf_merra2wrf/createSOILHGT'
-os.system(command)
+os.system(ls_command)
 
 #%% Now run createSOILHGT, which gives WRF terrain heights 
 now = start

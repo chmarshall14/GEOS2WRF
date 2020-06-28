@@ -1,16 +1,14 @@
-#!/bin/bash
-
-#SBATCH --nodes=1
-#SBATCH --job-name=GCONST
-#SBATCH --output=GCONST.out
+#!/bin/bash 
+#SBATCH --nodes=1 
+#SBATCH --job-name=GCONST 
+#SBATCH --output=GCONST.out 
 #SBATCH --error=GCONST.err
-#SBATCH --time=15:00:00
-#SBATCH --mem=100GB
-#SBATCH --ntasks-per-node=10
+#SBATCH --time=5:00:00
+#SBATCH --mem=10GB
+#SBATCH --ntasks-per-node=28
 #SBATCH --cpus-per-task=1
 #SBATCH --mail-type=END
 #SBATCH --mail-user=cm5515@nyu.edu
-
 cd /scratch/cm5515/scripts
 module load openmpi/intel/3.1.3
 module load intel/17.0.1
@@ -28,6 +26,4 @@ module load netcdf/intel/4.1.1
 module load zlib/intel/1.2.8
 module load jpeg/intel/9b
 module load python3/intel/3.7.3
-
 python GEOS_CONST.py &> log.GCONST
-

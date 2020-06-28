@@ -1,0 +1,73 @@
+&files
+
+geosFileFormat=2,
+geosFileName='c1440_NR.inst30mn_2d_met1_Nx.20050921_0400z.nc4',
+outputDirectory='./',
+/
+
+&coordinates
+longitudeName='lon',
+latitudeName='lat',
+hasVerticalDimension=.true.,
+verticalName='lev',
+/
+&forecast
+numberOfTimes=1,
+validTimes(1)='2005-09-21_04:00',
+timeIndices(1)= 1, 
+forecastHours(1)= 0, 
+/
+
+&variables
+numberofVariables=6
+
+variableRanks(1) = 3,
+variableLevelTypes(1) = 4,
+variableNamesIn(1)='SLP',
+variableNamesOut(1)='PMSL',
+variableUnits(1)='Pa',
+variableDescriptions(1)='mean_sea_level_pressure',
+
+variableRanks(2) = 3,
+variableLevelTypes(2) = 2,
+variableNamesIn(2)='QV2M',
+variableNamesOut(2)='SPECHUMD',
+variableUnits(2)='kg kg-1',
+variableDescriptions(2)='2_meter_specific_humidity',
+
+variableRanks(3) = 3,
+variableLevelTypes(3) = 2,
+variableNamesIn(3)='T2M',
+variableNamesOut(3)='TT',
+variableUnits(3)='K',
+variableDescriptions(3)='2_meter_temperature',
+
+variableRanks(4) = 3,
+variableLevelTypes(4) = 3,
+variableNamesIn(4)='U10M',
+variableNamesOut(4)='UU',
+variableUnits(4)='m s-1',
+variableDescriptions(4)='10_meter_eastward_wind',
+
+variableRanks(5) = 3,
+variableLevelTypes(5) = 3,
+variableNamesIn(5)='V10M',
+variableNamesOut(5)='VV',
+variableUnits(5)='m s-1',
+variableDescriptions(5)='10_meter_northward_wind',
+
+variableRanks(6) = 3,
+variableLevelTypes(6) = 1,
+variableNamesIn(6)='PS',
+variableNamesOut(6)='PSFC',
+variableUnits(6)='Pa',
+variableDescriptions(6)='surface_pressure',
+/
+&subsetData
+iLonMin=1121,
+iLonMax=2721,
+jLatMin=1601,
+jLatMax=2241,
+kVertMin=1,
+kVertMax=72,
+/
