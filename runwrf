@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /scratch/cm5515/control$1
+srun -n25 -N1 --mpi=pmi2 ./wrf.exe

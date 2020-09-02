@@ -13,7 +13,7 @@ import os
 # Change working directory
 
 #take the start and end date from the namelist
-from namelist_geos_scripts import GEOS_start, GEOS_end, path_to_storm, path_to_geos2wps, iLonMin, iLonMax, jLatMin, jLatMax
+from namelist_geos_scripts import storm_folder, GEOS_start, GEOS_end, path_to_storm, path_to_geos2wps, iLonMin, iLonMax, jLatMin, jLatMax
 os.chdir(path_to_storm)
 start = GEOS_start
 end= GEOS_end
@@ -21,15 +21,31 @@ end= GEOS_end
 
 #%% 
 # The outfolder for this field was created by the download_wrapper
-out_folder = path_to_storm+ '/storm_'+ start.strftime('%Y%m%d') + '/MET1'
-# Go inside the out folder
+out_folder = storm_folder + '/V' # Go inside the out folder
 os.chdir(out_folder)
 #go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps 
-ls_command='ln -s  + path_to_geos2wps
-
-#first, process the daily constants--land, ocean and lake fractions  
-
+ls_command='ln -s '  +  path_to_geos2wps
 os.system(ls_command)
+
+#first, see if the files you need are there
+now=start
+while now<= end:
+    filename = 'c1440_NR' +'.' 'inst30mn_3d_V_Nv' +'.' + now.strftime('%Y%m%d_%H%Mz') + '.' +'nc4'
+    folder = 'https://g5nr.nccs.nasa.gov/data/DATA/0.0625_deg/inst/'
+    data_field = 'inst30mn_3d_V_Nv'
+    url = folder + data_field # folder where data is kept
+    url = url + now.strftime('/Y%Y/M%m/D%d/') # specific date
+    url = url + 'c1440_NR.'
+    url = url + data_field 
+    url = url + now.strftime('.%Y%m%d_%H%Mz')
+    url = url + ".nc4"
+    command="wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t" + url
+    
+    if not os.path.exists(filename):
+        os.system(command)
+    now += timedelta(0, 30*60)
+
+
 now = start
 #create a namelist
 while now <= end:
@@ -68,7 +84,6 @@ while now <= end:
    namelist.write("\n")
    namelist.write("/\n")
    namelist.write("&subsetData\n")
-   namelist.write("subset=.true.,\n")
    namelist.write("subset=.true.,\n")
    namelist.write("iLonMin=" + str(iLonMin) + ",\n") 
    namelist.write("iLonMax=" + str(iLonMax) + ",\n") 

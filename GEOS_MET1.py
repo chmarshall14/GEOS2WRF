@@ -20,15 +20,29 @@ end= GEOS_end
 
 #%% 
 # The outfolder for this field was created by the download_wrapper
-out_folder = path_to_storm+ '/storm_'+ start.strftime('%Y%m%d') + '/MET1'
+out_folder = storm_folder + '/MET1'
 # Go inside the out folder
 os.chdir(out_folder)
 #go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps 
 ls_command='ln -s ' + path_to_geos2wps
-
-#first, process the daily constants--land, ocean and lake fractions  
-
 os.system(ls_command)
+
+#first, see if the files you need are there
+now=start
+while now<= end:
+    filename = 'c1440_NR' +'.' 'inst30mn_2d_met1_Nx' +'.' + now.strftime('%Y%m%d_%H%Mz') + '.' +'nc4'
+    folder = 'https://g5nr.nccs.nasa.gov/data/DATA/0.0625_deg/inst/'
+    data_field = 'inst30mn_2d_met1_Nx'
+    url = folder + data_field # folder where data is kept
+    url = url + now.strftime('/Y%Y/M%m/D%d/') # specific date
+    url = url + 'c1440_NR.'
+    url = url + data_field 
+    url = url + now.strftime('.%Y%m%d_%H%Mz')
+    url = url + ".nc4"
+    command="wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t" + url
+    if not os.path.exists(filename):
+        os.system(command)
+    now += timedelta(0, 30*60)
 now = start
 #create a namelist
 while now <= end:
@@ -101,6 +115,7 @@ while now <= end:
    namelist.write("variableDescriptions(6)='surface_pressure',\n") 
    namelist.write("/\n")
    namelist.write("&subsetData\n")
+   namelist.write("subset=.true.,\n")
    namelist.write("iLonMin=" + str(iLonMin) + ",\n") 
    namelist.write("iLonMax=" + str(iLonMax) + ",\n") 
    namelist.write("jLatMin=" + str(jLatMin) + ",\n") 

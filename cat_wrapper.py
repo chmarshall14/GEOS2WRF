@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 """
 Created on Thu Jun 25 14:07:32 2020
 
@@ -12,14 +12,13 @@ from datetime import datetime, timedelta
 import os
 #import the start and end time from the namelist
 #take the start and end date from the namelist
-from namelist_geos_scripts import cat_start, cat_end, path_to_storm, script_folder, net_id
+from namelist_geos_scripts import storm_folder, cat_start, cat_end, path_to_storm, script_folder, net_id
 start = cat_start
 end= cat_end
 
 
 # create a working directory
-storm_directory='storm_' + start.strftime('%Y%m%d')
-storm_directory=path_to_storm + '/' + storm_directory
+storm_directory=storm_folder
 cat_directory=storm_directory + '/CAT'
 os.mkdir(cat_directory)
 

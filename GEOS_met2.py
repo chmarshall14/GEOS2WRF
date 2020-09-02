@@ -11,7 +11,7 @@ import os
 # Change working directory
 
 #take the start and end date from the namelist
-from namelist_geos_scripts import GEOS_start, GEOS_end, path_to_storm, path_to_geos2wps, iLonMin, iLonMax, jLatMin, jLatMax
+from namelist_geos_scripts import GEOS_start, GEOS_end, path_to_storm, path_to_geos2wps, iLonMin, iLonMax, jLatMin, jLatMax, storm_folder
 os.chdir(path_to_storm)
 start = GEOS_start
 end= GEOS_end
@@ -19,15 +19,28 @@ end= GEOS_end
 
 #%% 
 # The outfolder for this field was created by the download_wrapper
-out_folder = path_to_storm+ '/storm_'+ start.strftime('%Y%m%d') + '/MET1'
+out_folder = storm_folder + '/MET2'
 # Go inside the out folder
 os.chdir(out_folder)
 #go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps 
 ls_command='ln -s ' + path_to_geos2wps
-
-#first, process the daily constants--land, ocean and lake fractions  
-
 os.system(ls_command)
+now=start
+while now<= end:
+    filename = 'c1440_NR' +'.' 'tavg30mn_2d_met2_Nx' +'.' + now.strftime('%Y%m%d_%H%Mz') + '.' +'nc4'
+    folder = 'https://g5nr.nccs.nasa.gov/data/DATA/0.0625_deg/tavg/'
+    data_field = 'tavg30mn_2d_met2_Nx'
+    url = folder + data_field # folder where data is kept
+    url = url + now.strftime('/Y%Y/M%m/D%d/') # specific date
+    url = url + 'c1440_NR.'
+    url = url + data_field 
+    url = url + now.strftime('.%Y%m%d_%H%Mz')
+    url = url + ".nc4"
+    command="wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t" + url
+    if not os.path.exists(filename):
+        os.system(command)
+    now += timedelta(0, 30*60)
+
 now = start
 #create a namelist
 while now <= end:
@@ -123,7 +136,6 @@ while now <= end:
    namelist.write("\n")
    namelist.write("/\n")
    namelist.write("&subsetData\n")
-   namelist.write("subset=.true.,\n")
    namelist.write("subset=.true.,\n")
    namelist.write("iLonMin=" + str(iLonMin) + ",\n") 
    namelist.write("iLonMax=" + str(iLonMax) + ",\n") 

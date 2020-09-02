@@ -14,7 +14,7 @@ from datetime import datetime, timedelta
 import os
 
 #take the start and end date from the namelist
-from namelist_geos_scripts import util_start, util_end, path_to_storm, iLonMin, iLonMax, jLatMin, jLatMax, net_id, script_folder
+from namelist_geos_scripts import storm_folder, util_start, util_end, path_to_storm, iLonMin, iLonMax, jLatMin, jLatMax, net_id, script_folder
 start = util_start
 end= util_end
 
@@ -22,7 +22,6 @@ end= util_end
 #first, we want to process a single time-slice of SST to use as a constant
 #geos2wps should already be here, if not remove the pound sign
 #os.system('ln -s /scratch/cm5515/NASA/shenglong/geos2wrf_merra2wrf/geos2wps')
-storm_folder= path_to_storm + '/storm_' + start.strftime('%Y%m%d')
 sst_directory= storm_folder +'/MET2' 
 print(sst_directory)
 os.chdir(sst_directory)
@@ -80,7 +79,7 @@ sbatch.write("#SBATCH --nodes=1 \n")
 sbatch.write("#SBATCH --job-name=GEOS_SST \n")
 sbatch.write("#SBATCH --output=GEOS_SST.out \n")
 sbatch.write("#SBATCH --error=GEOS_SST.err\n")
-sbatch.write("#SBATCH --time=1:00:00\n")
+sbatch.write("#SBATCH --time=20:00\n")
 sbatch.write("#SBATCH --mem=80GB\n")
 sbatch.write("#SBATCH --ntasks-per-node=25\n")
 sbatch.write("#SBATCH --cpus-per-task=1\n")

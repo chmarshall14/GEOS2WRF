@@ -10,19 +10,27 @@ import os
 # Change working directory
 os.chdir('/scratch/cm5515')
 #take the start and end date from the namelist
-from namelist_geos_scripts import util_start, util_end, path_to_storm, path_to_createLANDSEA
+from namelist_geos_scripts import  storm_folder, util_start, util_end, path_to_storm, path_to_createLANDSEA
 start = util_start
 end= util_end
 
-out_folder = path_to_storm+ '/storm_'+ start.strftime('%Y%m%d') + '/const'
+out_folder = storm_folder + '/const'
 # Go inside the out folder
 os.chdir(out_folder)
 #go through and iterate each variable over every time step, by creating a namelist for each timestep and running geos2wps 
 ls_command='ln -s ' + path_to_createLANDSEA
-
-#first, process the daily constants--land, ocean and lake fractions  
-
 os.system(ls_command)
+
+#first check that the files you need are there
+while now<= end:
+    timestamp=now.strftime('%Y-%m-%d_%H:%M')
+    filename = 'FRLAKE_GROUND_LEVEL:' + str(timestamp)
+    if not os.path.exists(filename):
+        print("missing" + filename)
+    otherfilename='FROCEAN_GROUND_LEVEL:' + str(timestamp)
+    if not os.path.exists(otherfilename):
+        print('missing' + otherfilename): 
+    now += timedelta(0, 30*60)
 
 #Now run utilities 
 #utilities want data combined into files with the format GEOS:TIMESTAMP
